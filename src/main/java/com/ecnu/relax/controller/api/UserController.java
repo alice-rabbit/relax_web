@@ -1,5 +1,7 @@
 package com.ecnu.relax.controller.api;
 
+import com.ecnu.relax.dto.BaseJson;
+import com.ecnu.relax.model.User;
 import com.ecnu.relax.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,11 +20,11 @@ public class UserController extends APIBaseController{
     private IUserService userService;
 
     @RequestMapping(value="/login", method = RequestMethod.GET)
-    public Map login(@RequestParam("phone")Integer phone, @RequestParam("password") String password){
-        Map<String,Object> result = new HashMap<>();
-        int loginResult = 0;
+    public BaseJson login(@RequestParam("phone")String phone, @RequestParam("password") String password){
+        BaseJson baseJson = new BaseJson();
+        /*int loginResult = 0;
         String message;
-        loginResult = 12345/*userService.login(phone,password)*/;
+        loginResult = userService.login(phone,password);
         switch (loginResult){
             case -1:
                 message = "没有该用户";
@@ -31,14 +33,19 @@ public class UserController extends APIBaseController{
                 message = "密码错误";
                 break;
             default:
-                /*如果该用户存在且密码正确*/
+                /*如果该用户存在且密码正确
                 HttpSession session = request.getSession();
                 session.setAttribute("userId", loginResult);
                 message = "登录成功";
                 break;
-        }
-        result.put("userId", loginResult);
-        result.put("returnMessage", message);
-        return result;
+        }*/
+        User user = new User();
+        user.setUserId(1);
+        user.setPhone("123");
+        baseJson.setReturnCode("登录成功");
+        baseJson.setErrorMessage("1.0LoginSuccess");
+        baseJson.setObj(user);
+        return baseJson;
     }
+
 }
