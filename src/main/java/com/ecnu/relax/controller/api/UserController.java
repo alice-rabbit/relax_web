@@ -18,7 +18,7 @@ public class UserController extends APIBaseController{
     private IUserService userService;
 
     @RequestMapping(value="/login", method = RequestMethod.GET)
-    public Map login(/*@RequestParam("phone")Integer phone, @RequestParam("password") String password*/){
+    public Map login(@RequestParam("phone")Integer phone, @RequestParam("password") String password){
         Map<String,Object> result = new HashMap<>();
         int loginResult = 0;
         String message;
