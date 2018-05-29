@@ -55,4 +55,14 @@ public interface UserMapper {
         "where user_id = #{userId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(User record);
+
+    @Select({
+            "select",
+            "user_id, nickname, phone, password, real_name, identity, remainder, portrait, ",
+            "relax_degree",
+            "from user",
+            "where phone = #{phone,jdbcType=VARCHAR}"
+    })
+    @ResultMap("BaseResultMap")
+    User selectByPhone(String phone);
 }
