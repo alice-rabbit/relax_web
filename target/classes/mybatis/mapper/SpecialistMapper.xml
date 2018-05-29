@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ecnu.relax.mapper.SpecialistMapper" >
+  <resultMap id="BaseResultMap" type="com.ecnu.relax.model.Specialist" >
+    <id column="specialist_id" property="specialistId" jdbcType="INTEGER" />
+    <result column="rating" property="rating" jdbcType="DOUBLE" />
+    <result column="qualification" property="qualification" jdbcType="VARCHAR" />
+    <result column="employ_length" property="employLength" jdbcType="INTEGER" />
+    <result column="introduction" property="introduction" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    specialist_id, rating, qualification, employ_length, introduction
+  </sql>
+  <insert id="insertSelective" parameterType="com.ecnu.relax.model.Specialist" >
+    insert into specialist
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="specialistId != null" >
+        specialist_id,
+      </if>
+      <if test="rating != null" >
+        rating,
+      </if>
+      <if test="qualification != null" >
+        qualification,
+      </if>
+      <if test="employLength != null" >
+        employ_length,
+      </if>
+      <if test="introduction != null" >
+        introduction,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="specialistId != null" >
+        #{specialistId,jdbcType=INTEGER},
+      </if>
+      <if test="rating != null" >
+        #{rating,jdbcType=DOUBLE},
+      </if>
+      <if test="qualification != null" >
+        #{qualification,jdbcType=VARCHAR},
+      </if>
+      <if test="employLength != null" >
+        #{employLength,jdbcType=INTEGER},
+      </if>
+      <if test="introduction != null" >
+        #{introduction,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ecnu.relax.model.Specialist" >
+    update specialist
+    <set >
+      <if test="rating != null" >
+        rating = #{rating,jdbcType=DOUBLE},
+      </if>
+      <if test="qualification != null" >
+        qualification = #{qualification,jdbcType=VARCHAR},
+      </if>
+      <if test="employLength != null" >
+        employ_length = #{employLength,jdbcType=INTEGER},
+      </if>
+      <if test="introduction != null" >
+        introduction = #{introduction,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where specialist_id = #{specialistId,jdbcType=INTEGER}
+  </update>
+</mapper>

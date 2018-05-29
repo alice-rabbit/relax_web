@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ecnu.relax.mapper.TimeslotMapper" >
+  <resultMap id="BaseResultMap" type="com.ecnu.relax.model.Timeslot" >
+    <id column="timeslot_id" property="timeslotId" jdbcType="INTEGER" />
+    <result column="concrete_time" property="concreteTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    timeslot_id, concrete_time
+  </sql>
+  <insert id="insertSelective" parameterType="com.ecnu.relax.model.Timeslot" >
+    insert into timeslot
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="timeslotId != null" >
+        timeslot_id,
+      </if>
+      <if test="concreteTime != null" >
+        concrete_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="timeslotId != null" >
+        #{timeslotId,jdbcType=INTEGER},
+      </if>
+      <if test="concreteTime != null" >
+        #{concreteTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ecnu.relax.model.Timeslot" >
+    update timeslot
+    <set >
+      <if test="concreteTime != null" >
+        concrete_time = #{concreteTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where timeslot_id = #{timeslotId,jdbcType=INTEGER}
+  </update>
+</mapper>
