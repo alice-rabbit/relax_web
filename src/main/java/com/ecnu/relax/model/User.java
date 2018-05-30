@@ -31,6 +31,17 @@ public class User {
         this.relaxDegree = 80.0;
     }
 
+    public User(String nickname,String realname,String phone,String pwd) {
+        this.nickname = nickname;
+        this.phone = phone;
+        this.password = pwd;
+        this.realName = realname;
+        this.identity = 0;
+        this.remainder = 0.0;
+        this.portrait = "1";
+        this.relaxDegree = 80.0;
+    }
+
     public Integer getUserId() {
         return userId;
     }
