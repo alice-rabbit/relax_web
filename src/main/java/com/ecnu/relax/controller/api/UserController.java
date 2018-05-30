@@ -37,4 +37,23 @@ public class UserController extends APIBaseController{
         return loginResult;
     }
 
+    @RequestMapping(value="/register", method = RequestMethod.GET)
+    public int register(@RequestParam("nickname")String nickname,@RequestParam("realname")String realname,@RequestParam("phone")String phone, @RequestParam("password") String password){
+        int registerResult = 0;
+        String message;
+        registerResult = userService.register(nickname,realname,phone,password);
+        switch (registerResult){
+            case -1:
+                message = "该手机号已经被注册";
+                break;
+            default:
+                //注册成功
+                HttpSession session = request.getSession();
+                session.setAttribute("userId", registerResult);
+                message = "注册成功";
+                break;
+        }
+        return registerResult;
+    }
+
 }

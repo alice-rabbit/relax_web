@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl extends BaseServiceImpl implements IUserService {
+
     @Autowired
     UserMapper userMapper;
+
     @Override
     public int login(String phone, String password) {
         int result = 0;
@@ -22,6 +24,21 @@ public class UserServiceImpl extends BaseServiceImpl implements IUserService {
             result = 0;
         } else {
             //登录成功
+            result = user.getUserId();
+        }
+        return result;
+    }
+
+    @Override
+    public int register(String nickname,String realname,String phone, String password) {
+        int result = 0;
+        User user = userMapper.selectByPhone(phone);
+        if (user != null) {
+            //已经被注册
+            result = -1;
+        } else {
+            user = new User(nickname,realname,phone,password);
+            userMapper.insertSelective(user);
             result = user.getUserId();
         }
         return result;
